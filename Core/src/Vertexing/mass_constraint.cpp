@@ -1,0 +1,26 @@
+double A1 = q1 / kappa1;
+double A2 = q2 / kappa2;
+double px1 = -A1 * sin(phi1);
+double py1 =  A1 * cos(phi1);
+double pz1 =  A1 * tanl1;
+double E1  = sqrt(A1 * A1 * (1 + tanl1 * tanl1) + m1 * m1);
+double px2 = -A2 * sin(phi2);
+double py2 =  A2 * cos(phi2);
+double pz2 =  A2 * tanl2;
+double E2  = sqrt(A2 * A2 * (1 + tanl2 * tanl2) + m2 * m2);
+double px = px1 + px2;
+double py = py1 + py2;
+double pz = pz1 + pz2;
+double E  = E1 + E2;
+double f  = E * E - (px * px + py * py + pz * pz) - M * M;
+
+double df_d_phi1 = 2*A1*(-A2*cos(phi1)*cos(phi2) + A2*sin(phi1)*sin(phi2) + A1);
+double df_d_d01 = 0;
+double df_d_kappa1 = -2*A1*A1*A2*tanl1*tanl2/(E1*kappa1*kappa1) - 2*A1*A2*cos(phi1 - phi2)/(E1*kappa1*kappa1) + 2*A2*sqrt(A1*A1*tanl1*tanl1 + A1*A1 + m1*m1)/kappa1/kappa1 - 2*A1*A1*A2/(E1*kappa1*kappa1);
+double df_d_z01 = 0;
+double df_d_tanl1 = 2*A1*A1*A2*tanl2/(E1*kappa1) + 2*A1*A1*sqrt(A1*A1*tanl1*tanl1 + A1*A1 + m1*m1)*tanl1/(E1*kappa1);
+double df_d_phi2 = -2*A2*(-A1*cos(phi1)*cos(phi2) + A1*sin(phi1)*sin(phi2) + A2);
+double df_d_d02 = 0;
+double df_d_kappa2 = -2*A2*A1*A2*tanl1*tanl2/(E2*kappa2*kappa2) - 2*A1*A2*cos(phi1 - phi2)/(E2*kappa2*kappa2) + 2*A1*sqrt(A2*A2*tanl2*tanl2 + A2*A2 + m2*m2)/kappa2/kappa2 - 2*A1*A2*A2/(E2*kappa2*kappa2);
+double df_d_z02 = 0;
+double df_d_tanl2 = 2*A2*A2*A1*tanl1/(E2*kappa2) + 2*A2*A2*sqrt(A2*A2*tanl2*tanl2 + A2*A2 + m2*m2)*tanl2/(E2*kappa2);
